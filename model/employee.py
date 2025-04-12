@@ -1,4 +1,4 @@
-from repository.employee_list import write_to_file, read_from_file
+from repository.general_list import write_to_file, read_from_file
 
 
 class Employee:
@@ -21,7 +21,7 @@ class Employee:
         employee_item["gender"] = e_gender
         e_birth = int(input("Enter date of birth: "))
         employee_item["date_of_birth"] = e_birth
-        write_to_file(employee_item)
+        write_to_file(employee_item, "employee")
 
     def edit_employee(self):
         new_employee = {}
@@ -62,7 +62,7 @@ class Employee:
         employees = list(
             map(lambda employee: {**employee, **new_employee} if employee["id"] == e_id else employee, employees))
 
-        write_to_file(employees)
+        write_to_file(employees, "employee")
 
     def remove_employee(self):
         employees = read_from_file()
@@ -73,4 +73,4 @@ class Employee:
             return
         else:
             updated_employees_list = list(filter(lambda employee: employee["id"] != e_id, employees))
-            write_to_file(updated_employees_list)
+            write_to_file(updated_employees_list, "employee")

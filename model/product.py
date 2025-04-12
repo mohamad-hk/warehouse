@@ -1,4 +1,4 @@
-from repository.product_list import write_to_file, read_from_file
+from repository.general_list import read_from_file, write_to_file
 
 
 class Product:
@@ -21,13 +21,13 @@ class Product:
         product_item["mid_category"] = p_m_category
         p_quantity = int(input("Enter quantity of product: "))
         product_item["quantity"] = p_quantity
-        product_list = read_from_file()
+        product_list = read_from_file("product")
         product_list.append(product_item)
-        write_to_file(product_list)
+        write_to_file(product_list, "product")
 
     def edit_product(self):
         new_product = {}
-        products = read_from_file()
+        products = read_from_file("product")
         p_id = int(input("Enter product id: "))
         temp_product = list(filter(lambda product: product["id"] == p_id, products))
         if not temp_product:
@@ -61,10 +61,10 @@ class Product:
 
         products = list(map(lambda product: {**product, **new_product} if product["id"] == p_id else product, products))
 
-        write_to_file(products)
+        write_to_file(products, "product")
 
     def remove_product(self):
-        products = read_from_file()
+        products = read_from_file("product")
         p_id = int(input("Enter product id: "))
         product_found = list(filter(lambda product: product["id"] == p_id, products))
         if not product_found:
@@ -72,4 +72,4 @@ class Product:
             return
         else:
             updated_product_list = list(filter(lambda product: product["id"] != p_id, products))
-            write_to_file(updated_product_list)
+            write_to_file(updated_product_list, "product")
