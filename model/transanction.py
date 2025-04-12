@@ -1,12 +1,12 @@
 class Transaction:
-    def __init__(self, name_product, quantity, consumer, date):
+    def __init__(self, name_product=None, quantity=None, consumer=None, date=None):
         self.name_product = name_product
         self.quantity = quantity
         self.consumer = consumer
         self.date = date
 
-    def show_income_transactions(self):
+    def import_into_warehouse(self):
         pass
 
-    def show_outcome_transactions(self):
+    def remove_from_warehouse(self):
         pass

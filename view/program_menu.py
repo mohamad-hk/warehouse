@@ -1,4 +1,5 @@
 from view.employee_menu import show_employee_menu
+from view.inventory_report import show_inventory_report
 from view.product_menu import show_product_menu
 from view.transaction_menu import show_transaction_menu
 
@@ -15,6 +16,6 @@ def program_menu():
             case "3":
                 show_transaction_menu()
             case "4":
-                pass
+                show_inventory_report()
             case "5":
                 exit()
