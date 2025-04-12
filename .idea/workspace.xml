@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c06ab49-c2d8-4e75-b275-9bebb874113b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/view/inventory_report.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/employee_list.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/employee.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/employee.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/transanction.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/transanction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/employee_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/employee_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/product_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/product_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/program_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/program_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/transaction_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/transaction_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repository/file_jobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/repository/product_list.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +145,9 @@
       <workItem from="1744386066560" duration="901000" />
       <workItem from="1744387759799" duration="3811000" />
       <workItem from="1744442573232" duration="4060000" />
+      <workItem from="1744447814571" duration="7000" />
+      <workItem from="1744448401476" duration="6194000" />
+      <workItem from="1744465259915" duration="1612000" />
     </task>
     <servers />
   </component>
@@ -183,7 +183,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonProject5$main.coverage" NAME="main Coverage Results" MODIFIED="1744446977825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonProject5$main.coverage" NAME="main Coverage Results" MODIFIED="1744454683607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonProject5$program_menu.coverage" NAME="program_menu Coverage Results" MODIFIED="1744390234000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
   </component>
 </project>
