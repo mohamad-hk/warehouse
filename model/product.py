@@ -64,4 +64,12 @@ class Product:
         write_to_file(products)
 
     def remove_product(self):
-        pass
+        products = read_from_file()
+        p_id = int(input("Enter product id: "))
+        product_found = list(filter(lambda product: product["id"] == p_id, products))
+        if not product_found:
+            print("Product not found!")
+            return
+        else:
+            updated_product_list = list(filter(lambda product: product["id"] != p_id, products))
+            write_to_file(updated_product_list)

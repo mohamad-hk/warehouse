@@ -65,4 +65,12 @@ class Employee:
         write_to_file(employees)
 
     def remove_employee(self):
-        pass
+        employees = read_from_file()
+        e_id = int(input("Enter employee id: "))
+        employee_found = list(filter(lambda employee: employee["id"] == e_id, employees))
+        if not employee_found:
+            print("Employee not found!")
+            return
+        else:
+            updated_employees_list = list(filter(lambda employee: employee["id"] != e_id, employees))
+            write_to_file(updated_employees_list)
