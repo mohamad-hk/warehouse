@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c06ab49-c2d8-4e75-b275-9bebb874113b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/controller/validate_employee.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/validate_product.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/validate_transaction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/employee_report.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/product_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee.dat" beforeDir="false" afterPath="$PROJECT_DIR$/employee.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/employee.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/employee.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/transanction.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/transanction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/inventory_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/inventory_report.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -211,6 +209,7 @@
       <workItem from="1744541338897" duration="1025000" />
       <workItem from="1744542409059" duration="84000" />
       <workItem from="1744542514869" duration="3423000" />
+      <workItem from="1744546117587" duration="1540000" />
     </task>
     <servers />
   </component>
@@ -248,7 +247,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject5$window.coverage" NAME="window Coverage Results" MODIFIED="1744534521072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
     <SUITE FILE_PATH="coverage/PythonProject5$inventory_report.coverage" NAME="inventory_report Coverage Results" MODIFIED="1744537858513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
-    <SUITE FILE_PATH="coverage/PythonProject5$main.coverage" NAME="main Coverage Results" MODIFIED="1744545894860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonProject5$main.coverage" NAME="main Coverage Results" MODIFIED="1744547557517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonProject5$program_menu.coverage" NAME="program_menu Coverage Results" MODIFIED="1744390234000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
   </component>
 </project>

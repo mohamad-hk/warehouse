@@ -13,7 +13,6 @@ class Product:
     def add_product(self):
         product_item = {}
         p_id = generate_id()
-        product_item["id"] = p_id
 
         while True:
             try:
@@ -44,11 +43,13 @@ class Product:
         while True:
             try:
                 p_quantity = int(input("Enter quantity of product: "))
-                if not check_quantity(p_quantity) and p_quantity>0:
+                if not check_quantity(p_quantity) and p_quantity > 0:
                     raise ValueError("Enter correct quantity")
                 break
             except ValueError as e:
                 print(e)
+
+        product_item["id"] = p_id
 
         product_item["name"] = p_name
         product_item["top_category"] = p_t_category
