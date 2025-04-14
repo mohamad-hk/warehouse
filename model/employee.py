@@ -52,7 +52,9 @@ class Employee:
         employee_item["last_name"] = e_l_name
         employee_item["gender"] = e_gender
         employee_item["date_of_birth"] = e_birth
-        write_to_file(employee_item, "employee")
+        employee_list = read_from_file("employee")
+        employee_list.append(employee_item)
+        write_to_file(employee_list, "employee")
 
     def edit_employee(self):
         new_employee = {}

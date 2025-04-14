@@ -45,23 +45,34 @@ class Transaction:
             except ValueError as e:
                 print(e)
 
-
         if check_employee(e_id) and check_product(p_name):
+            employee_list = read_from_file("employee")
+            transaction_list = read_from_file("transaction")
+            new_transaction = {}
+            employee_info = list(filter(lambda employee: employee["id"] == e_id, employee_list))
+
             p_quantity = int(input("Enter quantity of product: "))
             product_list = read_from_file("product")
             old_product = list(filter(lambda product: product["name"] == p_name, product_list))
             total_quantity = old_product[0]["quantity"] + p_quantity
             old_product[0]["quantity"] = total_quantity
+
+            new_transaction["product_name"] = p_name
+            new_transaction["quantity"] = p_quantity
+            new_transaction["status"] = "import"
+            new_transaction["modified_by"] = employee_info[0]["first_name"] + employee_info[0]["last_name"]
+
             products = list(
                 map(lambda product: {**product, **old_product[0]} if product["name"] == p_name else product,
                     product_list))
-
+            transaction_list.append(new_transaction)
+            write_to_file(transaction_list, "transaction")
             write_to_file(products, "product")
 
     def remove_from_warehouse(self):
         p_name = input("Enter name of product: ")
 
-        e_id = input("Enter your Employee id: ")
+        e_id = int(input("Enter your Employee id: "))
 
         if check_employee(e_id) and check_product(p_name):
             p_quantity = int(input("Enter quantity of product: "))
@@ -71,9 +82,22 @@ class Transaction:
             if p_quantity < old_product[0]["quantity"]:
                 total_quantity = old_product[0]["quantity"] - p_quantity
                 old_product[0]["quantity"] = total_quantity
+
+                transaction_list = read_from_file("transaction")
+                employee_list = read_from_file("employee")
+
+                employee_info = list(filter(lambda employee: employee["id"] == e_id, employee_list))
+                new_transaction = {}
+                new_transaction["product_name"] = p_name
+                new_transaction["quantity"] = p_quantity
+                new_transaction["status"] = "export"
+                new_transaction["modified_by"] = employee_info[0]["first_name"] + employee_info[0]["last_name"]
+
                 products = list(
                     map(lambda product: {**product, **old_product[0]} if product["name"] == p_name else product,
                         product_list))
+                transaction_list.append(new_transaction)
+                write_to_file(transaction_list, "transaction")
                 write_to_file(products, "product")
 
             else:
