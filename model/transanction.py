@@ -1,5 +1,4 @@
-from controller.validate_product import check_product_name
-from controller.validate_transaction import check_id
+from controller.validator import Validator
 from repository.general_list import read_from_file, write_to_file
 
 
@@ -21,7 +20,7 @@ def check_employee(employee_id):
         return False
 
 
-class Transaction:
+class Transaction(Validator):
     def __init__(self, product_name=None, quantity=None):
         self.product_name = product_name
         self.quantity = quantity
@@ -30,7 +29,10 @@ class Transaction:
         while True:
             try:
                 p_name = input("Enter name of product: ")
-                if not check_product_name(p_name):
+                prod_check = check_product(p_name)
+                if not prod_check:
+                    print("There is no product with the id you entered.")
+                if not self.check_name(p_name):
                     raise ValueError("Enter correct name")
                 break
             except ValueError as e:
@@ -38,31 +40,31 @@ class Transaction:
 
         while True:
             try:
-                e_id = int(input("Enter your Employee id: "))
-                if not check_id(e_id):
-                    raise ValueError("Enter correct id")
+                e_id_input = input("Enter your Employee id: ")
+                if not e_id_input.isdigit():
+                    raise ValueError("id must be a number")
+
+                e_id = int(e_id_input)
+
+                if not self.check_id(e_id):
+                    raise ValueError("Invalid id format")
+
+                emp_check = check_employee(e_id)
+                if not emp_check:
+                    print("There is no employee with the id you entered.")
+                    continue
+
                 break
             except ValueError as e:
                 print(e)
-
-        emp_check = check_employee(e_id)
-        prod_check = check_product(p_name)
-
-        if emp_check is not True:
-            return "There is no employee with the id you entered."
-
-        if prod_check is not True:
-            return "There is no product with the name you entered."
 
         p_quantity = int(input("Enter quantity of product: "))
         product_list = read_from_file("product")
         old_product = list(filter(lambda product: product["name"] == p_name, product_list))
 
-        if not old_product:
-            return "product not found"
-
         if status == "export" and p_quantity > old_product[0]["quantity"]:
-            return "The requested quantity is bigger than the available stock"
+            print("The requested quantity is bigger than the stock available")
+            return
 
         if status == "import":
             total_quantity = old_product[0]["quantity"] + p_quantity

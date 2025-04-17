@@ -1,8 +1,8 @@
-from controller.validate_product import generate_id, check_product_name, check_category, check_quantity
+from controller.validator import Validator
 from repository.general_list import read_from_file, write_to_file
 
 
-class Product:
+class Product(Validator):
     def __init__(self, product_id=None, product_name=None, top_category=None, mid_category=None, quantity=None):
         self.product_id = product_id
         self.product_name = product_name
@@ -12,12 +12,12 @@ class Product:
 
     def add_product(self):
         product_item = {}
-        p_id = generate_id()
+        p_id = self.generate_id("product")
 
         while True:
             try:
                 p_name = input("Enter name of product: ")
-                if not check_product_name(p_name):
+                if not self.check_name(p_name):
                     raise ValueError("Enter correct name")
                 break
             except ValueError as e:
@@ -26,7 +26,7 @@ class Product:
         while True:
             try:
                 p_t_category = input("Enter top_category of product: ")
-                if not check_category(p_t_category):
+                if not self.check_category(p_t_category):
                     raise ValueError("Enter correct name")
                 break
             except ValueError as e:
@@ -34,7 +34,7 @@ class Product:
         while True:
             try:
                 p_m_category = input("Enter mid_category of product: ")
-                if not check_category(p_m_category):
+                if not self.check_category(p_m_category):
                     raise ValueError("Enter correct name")
                 break
             except ValueError as e:
@@ -42,9 +42,15 @@ class Product:
 
         while True:
             try:
-                p_quantity = int(input("Enter quantity of product: "))
-                if not check_quantity(p_quantity) and p_quantity > 0:
+                p_quantity_input = input("Enter quantity of product: ")
+                if not p_quantity_input.isdigit():
+                    raise ValueError("quantity must be a number")
+
+                p_quantity = int(p_quantity_input)
+
+                if not self.check_quantity(p_quantity):
                     raise ValueError("Enter correct quantity")
+
                 break
             except ValueError as e:
                 print(e)
@@ -64,11 +70,16 @@ class Product:
     def edit_product(self):
         new_product = {}
         products = read_from_file("product")
-        try:
-            p_id = int(input("Enter product id: "))
-        except ValueError:
-            print("Invalid ID!")
-            return
+        while True:
+            try:
+                p_id_input = input("Enter product id: ")
+                if not p_id_input.isdigit():
+                    raise ValueError("id must be a number")
+
+                p_id = int(p_id_input)
+                break
+            except ValueError as e:
+                print(e)
 
         temp_product = list(filter(lambda product: product["id"] == p_id, products))
         if not temp_product:
@@ -81,7 +92,7 @@ class Product:
                 if p_name == "":
                     new_product["name"] = temp_product[0]["name"]
                     break
-                if not check_product_name(p_name):
+                if not self.check_name(p_name):
                     raise ValueError("Enter correct name")
                 new_product["name"] = p_name
                 break
@@ -95,7 +106,7 @@ class Product:
                 if p_t_category == "":
                     new_product["top_category"] = temp_product[0]["top_category"]
                     break
-                if not check_category(p_t_category):
+                if not self.check_category(p_t_category):
                     raise ValueError("Enter correct top category")
                 new_product["top_category"] = p_t_category
                 break
@@ -109,7 +120,7 @@ class Product:
                 if p_m_category == "":
                     new_product["mid_category"] = temp_product[0]["mid_category"]
                     break
-                if not check_category(p_m_category):
+                if not self.check_category(p_m_category):
                     raise ValueError("Enter correct mid category")
                 new_product["mid_category"] = p_m_category
                 break
@@ -118,12 +129,19 @@ class Product:
 
         while True:
             try:
-                p_quantity = int(input(f"(old quantity: {temp_product[0]['quantity']}) => Enter new quantity: "))
-                if p_quantity == "":
+                p_quantity_input = input(f"(old quantity: {temp_product[0]['quantity']}) => Enter new quantity: ")
+                if p_quantity_input == "":
                     new_product["quantity"] = temp_product[0]["quantity"]
                     break
-                if not check_quantity(p_quantity):
+
+                if not p_quantity_input.isdigit():
+                    raise ValueError("quantity must be a number")
+
+                p_quantity = int(p_quantity_input)
+
+                if not self.check_quantity(p_quantity):
                     raise ValueError("Enter correct quantity")
+
                 new_product["quantity"] = p_quantity
                 break
             except ValueError as e:
@@ -138,8 +156,9 @@ class Product:
         p_id = int(input("Enter product id: "))
         product_found = list(filter(lambda product: product["id"] == p_id, products))
         if not product_found:
-            print("Product not found!")
+            print("Product not found")
             return
         else:
             updated_product_list = list(filter(lambda product: product["id"] != p_id, products))
             write_to_file(updated_product_list, "product")
+            print("the product is deleted")
