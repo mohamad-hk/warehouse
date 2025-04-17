@@ -9,7 +9,7 @@ def check_product(name):
     if len(temp_list) > 0:
         return True
     else:
-        return "There isn't any product with this name"
+        return False
 
 
 def check_employee(employee_id):
@@ -18,7 +18,7 @@ def check_employee(employee_id):
     if len(temp_list) > 0:
         return True
     else:
-        return "Your employee id is incorrect"
+        return False
 
 
 class Transaction:
@@ -26,7 +26,7 @@ class Transaction:
         self.product_name = product_name
         self.quantity = quantity
 
-    def import_into_warehouse(self):
+    def handle_transaction(self, status):
         while True:
             try:
                 p_name = input("Enter name of product: ")
@@ -40,65 +40,51 @@ class Transaction:
             try:
                 e_id = int(input("Enter your Employee id: "))
                 if not check_id(e_id):
-                    raise ValueError("Enter correct name")
+                    raise ValueError("Enter correct id")
                 break
             except ValueError as e:
                 print(e)
 
-        if check_employee(e_id) and check_product(p_name):
-            employee_list = read_from_file("employee")
-            transaction_list = read_from_file("transaction")
-            new_transaction = {}
-            employee_info = list(filter(lambda employee: employee["id"] == e_id, employee_list))
+        emp_check = check_employee(e_id)
+        prod_check = check_product(p_name)
 
-            p_quantity = int(input("Enter quantity of product: "))
-            product_list = read_from_file("product")
-            old_product = list(filter(lambda product: product["name"] == p_name, product_list))
+        if emp_check is not True:
+            return "There is no employee with the id you entered."
+
+        if prod_check is not True:
+            return "There is no product with the name you entered."
+
+        p_quantity = int(input("Enter quantity of product: "))
+        product_list = read_from_file("product")
+        old_product = list(filter(lambda product: product["name"] == p_name, product_list))
+
+        if not old_product:
+            return "product not found"
+
+        if status == "export" and p_quantity > old_product[0]["quantity"]:
+            return "The requested quantity is bigger than the available stock"
+
+        if status == "import":
             total_quantity = old_product[0]["quantity"] + p_quantity
-            old_product[0]["quantity"] = total_quantity
+        else:
+            total_quantity = old_product[0]["quantity"] - p_quantity
 
-            new_transaction["product_name"] = p_name
-            new_transaction["quantity"] = p_quantity
-            new_transaction["status"] = "import"
-            new_transaction["modified_by"] = employee_info[0]["first_name"] + employee_info[0]["last_name"]
+        old_product[0]["quantity"] = total_quantity
 
-            products = list(
-                map(lambda product: {**product, **old_product[0]} if product["name"] == p_name else product,
-                    product_list))
-            transaction_list.append(new_transaction)
-            write_to_file(transaction_list, "transaction")
-            write_to_file(products, "product")
+        transaction_list = read_from_file("transaction")
+        employee_list = read_from_file("employee")
+        employee_info = list(filter(lambda employee: employee["id"] == e_id, employee_list))
 
-    def remove_from_warehouse(self):
-        p_name = input("Enter name of product: ")
+        new_transaction = {}
+        new_transaction["product_name"] = p_name
+        new_transaction["quantity"] = p_quantity
+        new_transaction["status"] = status
+        new_transaction["modified_by"] = employee_info[0]["first_name"] + " " + employee_info[0]["last_name"]
 
-        e_id = int(input("Enter your Employee id: "))
+        products = list(
+            map(lambda product: {**product, **old_product[0]} if product["name"] == p_name else product,
+                product_list))
 
-        if check_employee(e_id) and check_product(p_name):
-            p_quantity = int(input("Enter quantity of product: "))
-            product_list = read_from_file("product")
-
-            old_product = list(filter(lambda product: product["name"] == p_name, product_list))
-            if p_quantity < old_product[0]["quantity"]:
-                total_quantity = old_product[0]["quantity"] - p_quantity
-                old_product[0]["quantity"] = total_quantity
-
-                transaction_list = read_from_file("transaction")
-                employee_list = read_from_file("employee")
-
-                employee_info = list(filter(lambda employee: employee["id"] == e_id, employee_list))
-                new_transaction = {}
-                new_transaction["product_name"] = p_name
-                new_transaction["quantity"] = p_quantity
-                new_transaction["status"] = "export"
-                new_transaction["modified_by"] = employee_info[0]["first_name"] + employee_info[0]["last_name"]
-
-                products = list(
-                    map(lambda product: {**product, **old_product[0]} if product["name"] == p_name else product,
-                        product_list))
-                transaction_list.append(new_transaction)
-                write_to_file(transaction_list, "transaction")
-                write_to_file(products, "product")
-
-            else:
-                return "your requirement is bigger than stock"
+        transaction_list.append(new_transaction)
+        write_to_file(transaction_list, "transaction")
+        write_to_file(products, "product")
