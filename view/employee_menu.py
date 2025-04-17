@@ -15,3 +15,5 @@ def show_employee_menu():
                 employee_obj.remove_employee()
             case "4":
                 return
+            case _:
+                print("your number should be between 1 and 4")

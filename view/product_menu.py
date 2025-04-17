@@ -15,3 +15,5 @@ def show_product_menu():
                 product_obj.remove_product()
             case "4":
                 return
+            case _:
+                print("your number should be between 1 and 4")

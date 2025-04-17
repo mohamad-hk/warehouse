@@ -19,3 +19,5 @@ def program_menu():
                 show_inventory_report()
             case "5":
                 exit()
+            case _:
+                print("your number should be between 1 and 5")
