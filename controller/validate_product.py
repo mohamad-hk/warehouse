@@ -1,8 +1,15 @@
 import re
 
+from repository.general_list import read_from_file
+
 
 def generate_id():
-    pass
+    product_list = read_from_file("product")
+    if not product_list:
+        return 1
+
+    last_id = product_list[-1]["id"]
+    return last_id + 1
 
 
 def check_product_name(first_name):
