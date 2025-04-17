@@ -4,6 +4,11 @@ import pickle
 
 def write_to_file(data_list, name_file):
     name_file = name_file + ".dat"
+
+    if not os.path.exists(name_file):
+        file = open(name_file, 'wb')
+        file.close()
+
     file = open(name_file, 'wb')
     pickle.dump(data_list, file)
     file.close()
@@ -12,7 +17,12 @@ def write_to_file(data_list, name_file):
 def read_from_file(name_file):
     name_file = name_file + ".dat"
 
-    if not os.path.exists(name_file) or os.stat(name_file).st_size == 0:
+    if not os.path.exists(name_file):
+        file = open(name_file, 'wb')
+        file.close()
+        return []
+
+    if os.stat(name_file).st_size == 0:
         return []
 
     try:
@@ -21,5 +31,4 @@ def read_from_file(name_file):
         file.close()
         return data_list
     except EOFError:
-        print("Error: The file is empty.")
         return []
